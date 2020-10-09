@@ -1,18 +1,17 @@
 package Annuaire;
 
+import java.util.Date;
+
 public class Contact {
 
 	private String nom;
 	private String prenom;
 	private int age;
+	private Date dateNaissance;
 	private String email;
 	private String telephone;
 	
 	private static int nbContacts;
-	
-	public Contact() {
-		
-	}
 	
 	public Contact(String prenom, String nom, String telephone) {
 		this.prenom = prenom;
