@@ -8,13 +8,15 @@ import java.util.Date;
 
 public class Contact {
 
+	private static int nbContacts;
+	
 	private String nom;
 	private String prenom;
 	private int age;
 	private String email;
 	private String telephone;
 	
-	private static int nbContacts;
+	
 	
 	public Contact(String prenom, String nom, String telephone) {
 		this.prenom = prenom;
@@ -31,6 +33,41 @@ public class Contact {
 		
 		this.email = email;
 		this.age = age;
+	}
+	
+	
+	public static Contact getContactFromCSV(String csv) {
+		String[] parties = csv.split(";");
+		
+		return new Contact(parties[1], parties[0], parties[3], 
+				parties[4], Integer.parseInt(parties[2]));
+	}
+	
+	public static ArrayList<Contact> chargerContacts() {
+		ArrayList<Contact> contacts = new ArrayList<Contact>();
+		
+		try {
+			
+			FileReader reader = new FileReader("annuaire3.csv");
+			BufferedReader br = new BufferedReader(reader);
+			
+			while(br.ready()) {
+				
+				String ligne = br.readLine();
+				
+				Contact contact = Contact.getContactFromCSV(ligne);
+				
+				contacts.add(contact);
+			}
+			
+			br.close();
+			
+		}
+		catch(Exception ex) {
+			System.out.println("Une erreur est survenue lors du chargement des contacts.");
+		}
+		
+		return contacts;
 	}
 	
 	
@@ -95,7 +132,8 @@ public class Contact {
 	}
 	
 	public String toCSV() {
-		return String.format("%s;%s;%s;%s;%s\n", this.nom, this.prenom, this.age, this.telephone, this.email);
+		return String.format("%s;%s;%s;%s;%s\n", this.nom, this.prenom, this.age, 
+				this.telephone, this.email);
 	}
 	
 	
@@ -115,37 +153,5 @@ public class Contact {
 		}
 	}
 	
-	public static Contact getContactFromCSV(String csv) {
-		String[] parties = csv.split(";");
-		
-		return new Contact(parties[1], parties[0], parties[3], 
-				parties[4], Integer.parseInt(parties[2]));
-	}
 	
-	public static ArrayList<Contact> chargerContacts() {
-		ArrayList<Contact> contacts = new ArrayList<Contact>();
-		
-		try {
-			
-			FileReader reader = new FileReader("annuaire.csv");
-			BufferedReader br = new BufferedReader(reader);
-			
-			while(br.ready()) {
-				
-				String ligne = br.readLine();
-				
-				Contact contact = Contact.getContactFromCSV(ligne);
-				
-				contacts.add(contact);
-			}
-			
-			br.close();
-			
-		}
-		catch(Exception ex) {
-			System.out.println("Une erreur est survenue lors du chargement des contacts.");
-		}
-		
-		return contacts;
-	}
 }
