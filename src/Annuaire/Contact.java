@@ -7,7 +7,6 @@ public class Contact {
 	private String nom;
 	private String prenom;
 	private int age;
-	private Date dateNaissance;
 	private String email;
 	private String telephone;
 	
