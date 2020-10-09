@@ -1,5 +1,7 @@
 package exemples;
 
+import java.util.ArrayList;
+
 public class Tableau {
 
 	public static void main(String[] args) {
@@ -28,6 +30,18 @@ public class Tableau {
 		}
 		
 		mini(chiffres);
+		
+		
+		ArrayList<String> contacts = new ArrayList<String>();
+		contacts.add("Thomas");
+		contacts.add("Robert");
+		contacts.add("Jean");
+		
+		for(String nom : contacts) {
+			System.out.println(nom);
+		}
+		
+		
 
 	}
 	
